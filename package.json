@@ -1,0 +1,10 @@
+{
+    "name": "com.mattylase.specter",
+    "version": "0.0.1",
+    "displayName": "Specter",
+    "description": "Ghosts for Unity ���",
+    "author": {
+        "name": "Matt Laser",
+        "email": "matthew.laser@gmail.com"
+    }
+}
