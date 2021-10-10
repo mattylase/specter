@@ -4,7 +4,16 @@ using UnityEngine;
 
 namespace Specter
 {
-    internal class Frame { }
+    public class Frame { }
     internal class DeterministicFrame: Frame { }
-    internal class ImperativeFrame: Frame { }
+    internal class ImperativeFrame: Frame {
+        public ImperativeFrame(Vector3 position, Quaternion rotation)
+        {
+            p = position;
+            q = rotation;
+        }
+
+        internal Vector3 p;
+        internal Quaternion q;
+    }
 }
