@@ -1,21 +1,35 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Specter
 {
     public class SpecterCapture : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        private CaptureOptions _default; 
+
+        void Awake()
+        {
+            _default = new CaptureOptions(
+                    new CaptureOptions.CaptureRate(Time.fixedDeltaTime)
+                );
+        }
+
+        public void BeginCapture(CaptureMode mode = CaptureMode.Imperative)
         {
 
         }
 
-        // Update is called once per frame
-        void Update()
+        public void PauseCapture()
         {
 
         }
+
+        public void StopCapture()
+        {
+
+        }
+
+
+        // private methods
+
     }
 }
