@@ -1,0 +1,16 @@
+{
+    "name": "MattyLase.Specter.Samples",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ba6178485ab481647830aa7c12f444c0"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

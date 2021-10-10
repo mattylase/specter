@@ -6,22 +6,24 @@ namespace Specter
 {
     public class CaptureOptions {
 
-        public CaptureRate rate { get; }
+        public static CaptureOptions DEFAULT { internal set; get; }
 
-        public CaptureOptions(CaptureRate rate)
+        public Rate catureRate { get; }
+
+        public CaptureOptions(Rate rate)
         {
-            rate = rate;
+            catureRate = rate;
         }
 
 
-        public struct CaptureRate
+        public struct Rate
         {
-            public CaptureRate(float rate)
+            public Rate(float rate)
             {
-                Rate = rate;
+                Frequency = rate;
             }
 
-            public float Rate { get; }
+            public float Frequency { get; }
         }
     }
 }
