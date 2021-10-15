@@ -26,6 +26,7 @@ public class CubeController : MonoBehaviour
         {
             var result = GetComponent<SpecterCapture>().StopCapture();
             Debug.Log("Got a stack of " + result.Frames.Count + " frames!");
+            FindObjectOfType<SpecterReplay>().Play(result, new PlaybackOptions());
         }
 
 

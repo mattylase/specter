@@ -10,9 +10,11 @@ namespace Specter
 
         public Queue<Frame> Frames;
         public CaptureOptions Options;
+        public CaptureMode CaptureMode;
 
-        public CaptureResult(CaptureOptions options, Queue<Frame> frames)
+        public CaptureResult(CaptureMode mode, CaptureOptions options, Queue<Frame> frames)
         {
+            CaptureMode = mode;
             Frames = frames;
             Options = options;
         }
