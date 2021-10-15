@@ -8,6 +8,7 @@ namespace Specter
     public class SpecterCapture : MonoBehaviour
     {
         private CaptureOptions activeOptions;
+        private CaptureMode activeMode;
         private bool capturing = false;
         private bool paused = false;
         private Queue<Frame> frames;
@@ -21,6 +22,8 @@ namespace Specter
 
         public void BeginCapture(CaptureMode mode = CaptureMode.Imperative, CaptureOptions options = null)
         {
+            activeMode = mode;
+
             if (mode == CaptureMode.Imperative)
             {
                 var opts = options ?? CaptureOptions.DEFAULT;
@@ -38,7 +41,7 @@ namespace Specter
             capturing = false;
             paused = false;
 
-            return new CaptureResult(activeOptions, frames);
+            return new CaptureResult(activeMode, activeOptions, frames);
         }
 
         // private methods
