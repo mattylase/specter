@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace Specter
@@ -23,17 +23,17 @@ namespace Specter
                 yield break;
             }
 
-            ImperativeFrame first = (ImperativeFrame) frames.Dequeue();
+            ImperativeFrame first = (ImperativeFrame)frames.Dequeue();
 
             transform.position = first.p;
             transform.rotation = first.q;
 
             float timeElapsed = 0f;
-            float lerpDuration = result.Options.catureRate.Frequency / options.Speed;
 
             while (frames.Count != 0)
             {
-                var next = (ImperativeFrame) frames.Dequeue();
+                var next = (ImperativeFrame)frames.Dequeue();
+                var lerpDuration = GetLerpDuration(next, result.Options, options);
 
                 while (timeElapsed < lerpDuration)
                 {
@@ -46,6 +46,24 @@ namespace Specter
 
                 timeElapsed = 0f;
             }
+        }
+
+        private float GetLerpDuration(Frame frame, CaptureOptions captureOptions, PlaybackOptions playbackOptions)
+        {
+            if (frame is ImperativeFrame)
+            {
+                var f = (ImperativeFrame)frame;
+                if (captureOptions.FlattenFrames)
+                {
+                    return (f.s * captureOptions.CaptureRate.Frequency) / playbackOptions.Speed;
+                }
+                else
+                {
+                    return captureOptions.CaptureRate.Frequency / playbackOptions.Speed;
+                }
+            }
+
+            throw new InvalidOperationException("Not supported just yet ;P");
         }
     }
 }
