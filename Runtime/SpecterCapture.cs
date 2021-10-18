@@ -16,7 +16,8 @@ namespace Specter
         void Awake()
         {
             CaptureOptions.DEFAULT = new CaptureOptions(
-                    new CaptureOptions.Rate(Time.fixedDeltaTime)
+                    new CaptureOptions.Rate(Time.fixedDeltaTime),
+                    true
                 );
         }
 
@@ -60,15 +61,42 @@ namespace Specter
         private IEnumerator ImperativeCoroutine(CaptureOptions options)
         {
             frames = new Queue<Frame>();
-            while(capturing)
+            ImperativeFrame previousFrame = null;
+            ImperativeFrame currentFrame = null;
+            while (capturing)
             {
                 if (paused)
                 {
                     yield return null;
                 }
 
-                frames.Enqueue(new ImperativeFrame(transform.position, transform.rotation));
-                yield return new WaitForSeconds(options.catureRate.Frequency);
+                currentFrame = new ImperativeFrame(transform.position, transform.rotation);
+
+                if (options.FlattenFrames)
+                {
+
+                    if (previousFrame == null)
+                    {
+                        previousFrame = currentFrame;
+                        continue;
+                    }
+
+                    if (currentFrame.Equals(previousFrame))
+                    {
+                        previousFrame.s += 1;
+                    }
+                    else
+                    {
+                        frames.Enqueue(previousFrame);
+                        previousFrame = currentFrame;
+                    }
+                }
+                else
+                {
+                    frames.Enqueue(new ImperativeFrame(transform.position, transform.rotation));
+                }
+
+                yield return new WaitForSeconds(options.CaptureRate.Frequency);
             }
         }
     }

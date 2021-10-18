@@ -4,11 +4,13 @@ namespace Specter
 
         public static CaptureOptions DEFAULT { internal set; get; }
 
-        public Rate catureRate { get; }
+        public Rate CaptureRate { get; private set; }
+        public bool FlattenFrames { get; private set; }
 
-        public CaptureOptions(Rate rate)
+        public CaptureOptions(Rate rate, bool flattenFrames)
         {
-            catureRate = rate;
+            CaptureRate = rate;
+            FlattenFrames = flattenFrames;
         }
 
 
